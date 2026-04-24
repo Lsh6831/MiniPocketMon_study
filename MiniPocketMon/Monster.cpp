@@ -39,4 +39,5 @@ void Monster::TakeDamage(int attack,int skiiltype,int deffender_def,int deffende
     
     cout << "damage=" << damage <<"HP"<< hp <<"critical_Chance"<< critical_Chance<<"\n";
     
+    cout << "damage=" << damage <<"HP"<< hp <<"critical_Chance"<< critical_Chance<<"\n";
 }
