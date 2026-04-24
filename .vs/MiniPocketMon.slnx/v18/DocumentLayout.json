@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\MiniPocketMon\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{89A9E926-1C45-4D7D-ADE6-57027D79BD31}|MiniPocketMon\\MiniPocketMon.vcxproj|C:\\Users\\user\\source\\repos\\MiniPocketMon\\MiniPocketMon\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{89A9E926-1C45-4D7D-ADE6-57027D79BD31}|MiniPocketMon\\MiniPocketMon.vcxproj|solutionrelative:MiniPocketMon\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Main.cpp",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\MiniPocketMon\\MiniPocketMon\\Main.cpp",
+              "RelativeDocumentMoniker": "MiniPocketMon\\Main.cpp",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\MiniPocketMon\\MiniPocketMon\\Main.cpp",
+              "RelativeToolTip": "MiniPocketMon\\Main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-24T07:30:26.773Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
