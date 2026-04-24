@@ -11,10 +11,8 @@ protected://기본 능력치(스테이터스)
     ;int typecode;
     
 public:
-    Monster(int eng,int att,int def, int spe , int lv= 1,int typ);
+    Monster(int eng,int att,int def, int spe , int lv= 1,int typ=1);
     
-    int getEnergy();
-
     int get_energy() const{return energy;}
 
     int get_attack() const { return attack;}
@@ -32,5 +30,5 @@ public:
     int get_typecode() const{ return typecode;}
     
     
-    void Monster::TakeDamage(int attack,int skiiltype,int deffender_def,int deffender_type);
+    void TakeDamage(int attack,int skiiltype,int deffender_def,int deffender_type);
 };

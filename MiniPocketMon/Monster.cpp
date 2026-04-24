@@ -37,6 +37,6 @@ void Monster::TakeDamage(int attack,int skiiltype,int deffender_def,int deffende
     float damage=attack*typedamage*critical-deffender_def;
     hp-=damage;
     
-    cout << "damage=" << damage <<"HP"<< hp << "\n";
+    cout << "damage=" << damage <<"HP"<< hp <<"critical_Chance"<< critical_Chance<<"\n";
     
 }
