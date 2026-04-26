@@ -1,5 +1,6 @@
 #pragma once
 #include "Monster.h"
+#include "Player.h"
 
 
 class Battle
@@ -8,12 +9,12 @@ public:
     
     int SelectAction();
 
-    void PlayerAttack(Monster& player, Monster& enemy);
+    bool PlayerAttack(Player& player, Monster& playerMonster, Monster& enemy);
 
     void EnemyAttack(Monster& enemy, Monster& player);
 
-    void StartBattle(Monster& player, Monster& enemy);
+    void StartBattle(Player& player, Monster& playerMonster, Monster& enemy);
     
-    bool TryCatch(Monster& enemy);
+    bool TryCatch(Player& player, Monster& enemy);
 
 };

@@ -11,11 +11,12 @@ int Battle::SelectAction()
     cout << "\n행동을 선택하세요.\n";
     cout << "1. 기본 공격\n";
     cout << "2. 스킬 공격\n";
-    cout << "3. 몬스터볼 던지기\n";
+    cout << "3. 상처약 사용\n";
+    cout << "4. 몬스터볼 던지기\n";
     cout << "선택: ";
     cin >> action;
 
-    if (action < 1 || action > 3)
+    if (action < 1 || action > 4)
     {
         cout << "잘못 입력해서 기본 공격을 합니다.\n";
         action = 1;
@@ -24,39 +25,52 @@ int Battle::SelectAction()
     return action;
 }
 
-void Battle::PlayerAttack(Monster& player, Monster& enemy)
+bool Battle::PlayerAttack(Player& player, Monster& playerMonster, Monster& enemy)
 {
     int action = SelectAction();
 
     if (action == 1)
     {
-        cout << "\n플레이어의 기본 공격!\n";
+        cout << "\n기본 공격!\n";
 
         enemy.TakeDamage(
-            player.get_attack(),
-            player.get_typecode(),
+            playerMonster.get_attack(),
+            playerMonster.get_typecode(),
             enemy.get_defense(),
             enemy.get_typecode()
         );
     }
     else if (action == 2)
     {
-        cout << "\n플레이어의 스킬 공격!\n";
+        cout << "\n스킬 공격!\n";
 
         enemy.TakeDamage(
-            player.get_attack() + 3,
-            player.get_typecode(),
+            playerMonster.get_attack() + 3,
+            playerMonster.get_typecode(),
             enemy.get_defense(),
             enemy.get_typecode()
         );
     }
     else if (action == 3)
     {
-        TryCatch(enemy);
+        cout << "\n상처약 사용!\n";
+
+        // Monster의 hp가 private/protected라서
+        // 지금 Monster 클래스에 Heal 함수가 필요함
+        // 예: playerMonster.Heal(20);
     }
+    else if (action == 4)
+    {
+        if (TryCatch(player, enemy))
+        {
+            return true; // 포획 성공 → 전투 종료
+        }
+    }
+
+    return false;
 }
 
-void Battle::EnemyAttack(Monster& enemy, Monster& player)
+void Battle::EnemyAttack(Monster& enemy, Monster& playerMonster)
 {
     int action = rand() % 2 + 1;
 
@@ -64,27 +78,33 @@ void Battle::EnemyAttack(Monster& enemy, Monster& player)
     {
         cout << "\n적의 기본 공격!\n";
 
-        player.TakeDamage(
+        playerMonster.TakeDamage(
             enemy.get_attack(),
             enemy.get_typecode(),
-            player.get_defense(),
-            player.get_typecode()
+            playerMonster.get_defense(),
+            playerMonster.get_typecode()
         );
     }
     else
     {
         cout << "\n적의 스킬 공격!\n";
 
-        player.TakeDamage(
+        playerMonster.TakeDamage(
             enemy.get_attack() + 3,
             enemy.get_typecode(),
-            player.get_defense(),
-            player.get_typecode()
+            playerMonster.get_defense(),
+            playerMonster.get_typecode()
         );
     }
 }
-bool Battle::TryCatch(Monster& enemy)
+
+bool Battle::TryCatch(Player& player, Monster& enemy)
 {
+    if (!player.UseMonsterBall())
+    {
+        return false;
+    }
+
     int hpPercent = enemy.get_hp() * 100 / enemy.get_maxhp();
 
     int catchRate = 20;
@@ -104,7 +124,6 @@ bool Battle::TryCatch(Monster& enemy)
 
     int randomValue = rand() % 100 + 1;
 
-    cout << "\n몬스터볼을 던졌다!\n";
     cout << "포획 확률: " << catchRate << "%\n";
 
     if (randomValue <= catchRate)
@@ -112,24 +131,22 @@ bool Battle::TryCatch(Monster& enemy)
         cout << "포획 성공!\n";
         return true;
     }
-    else
-    {
-        cout << "포획 실패!\n";
-        return false;
-    }
+
+    cout << "포획 실패!\n";
+    return false;
 }
 
-void Battle::StartBattle(Monster& player, Monster& enemy)
+void Battle::StartBattle(Player& player, Monster& playerMonster, Monster& enemy)
 {
     while (true)
     {
         bool playerFirst;
 
-        if (player.get_moving_speed() > enemy.get_moving_speed())
+        if (playerMonster.get_moving_speed() > enemy.get_moving_speed())
         {
             playerFirst = true;
         }
-        else if (player.get_moving_speed() < enemy.get_moving_speed())
+        else if (playerMonster.get_moving_speed() < enemy.get_moving_speed())
         {
             playerFirst = false;
         }
@@ -141,7 +158,14 @@ void Battle::StartBattle(Monster& player, Monster& enemy)
         if (playerFirst)
         {
             cout << "\n[플레이어 선공]\n";
-            PlayerAttack(player, enemy);
+
+            bool isCatchSuccess = PlayerAttack(player, playerMonster, enemy);
+
+            if (isCatchSuccess)
+            {
+                cout << "\n전투 종료!\n";
+                break;
+            }
 
             if (enemy.get_hp() <= 0)
             {
@@ -150,9 +174,9 @@ void Battle::StartBattle(Monster& player, Monster& enemy)
             }
 
             cout << "\n[적 턴]\n";
-            EnemyAttack(enemy, player);
+            EnemyAttack(enemy, playerMonster);
 
-            if (player.get_hp() <= 0)
+            if (playerMonster.get_hp() <= 0)
             {
                 cout << "\n패배했습니다!\n";
                 break;
@@ -161,16 +185,23 @@ void Battle::StartBattle(Monster& player, Monster& enemy)
         else
         {
             cout << "\n[적 선공]\n";
-            EnemyAttack(enemy, player);
+            EnemyAttack(enemy, playerMonster);
 
-            if (player.get_hp() <= 0)
+            if (playerMonster.get_hp() <= 0)
             {
                 cout << "\n패배했습니다!\n";
                 break;
             }
 
             cout << "\n[플레이어 턴]\n";
-            PlayerAttack(player, enemy);
+
+            bool isCatchSuccess = PlayerAttack(player, playerMonster, enemy);
+
+            if (isCatchSuccess)
+            {
+                cout << "\n전투 종료!\n";
+                break;
+            }
 
             if (enemy.get_hp() <= 0)
             {
