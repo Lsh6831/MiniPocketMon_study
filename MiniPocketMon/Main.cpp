@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Monster.h"
+#include "Battle.h"
 #include <cstdlib> 
 #include <ctime>
 using namespace std;
@@ -60,6 +61,35 @@ int main()
     cout << "속성 코드: " << player.get_typecode() << "\n";
 
     cout << "\n전투를 시작합니다!\n";
+
+    // 적 몬스터 생성
+    Monster enemy(10, 7, 3, 4, 1, 1);
+
+    int enemyType = rand() % 4 + 1;
+
+    if (enemyType == 1)
+    {
+        enemy = Monster(10, 7, 3, 4, 1, 1);
+        cout << "\n야생 파이리가 나타났다!\n";
+    }
+    else if (enemyType == 2)
+    {
+        enemy = Monster(12, 5, 4, 3, 1, 2);
+        cout << "\n야생 이상해씨가 나타났다!\n";
+    }
+    else if (enemyType == 3)
+    {
+        enemy = Monster(11, 6, 5, 2, 1, 3);
+        cout << "\n야생 꼬부기가 나타났다!\n";
+    }
+    else
+    {
+        enemy = Monster(9, 8, 2, 7, 1, 4);
+        cout << "\n야생 파오리가 나타났다!\n";
+    }
+
+    Battle battle;
+    battle.StartBattle(player, enemy);
 
     return 0;
 }
