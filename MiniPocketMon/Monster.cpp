@@ -2,31 +2,28 @@
 #include <string> 
 #include <iostream>
 
-Monster::Monster(int eng, int att, int def, int spe, int lv, int typ)
-    : energy(eng), attack(att), defense(def), movingSpeed(spe), level(lv), typecode(typ) 
+Monster::Monster(string name, int eng, int att, int def, int spe, int lv, int typ)
+    : name(name),energy(eng), attack(att), defense(def), movingSpeed(spe), level(lv), typecode(typ) 
 {
     maxhp = energy*10;
     hp = maxhp;
 }
 
 
-void Monster::TakeDamage(int attack,int skiiltype,int deffender_def,int deffender_type)
+void Monster::TakeDamage(string attackerName, string attackName, int attack, int skilltype, int defender_def, int defender_type)
 {
     //typecode
     //1.FIRE 2.GRASS 3.WATER 4.WIND 
-    float typedamage=1.0f;
+    float typeDamage = 1.0f;
     
-        if ( skiiltype == 2 && deffender_type == 2) typedamage=2.0f;
-        if ( skiiltype == 2 && deffender_type == 3) typedamage=0.5f;
+    if (skilltype == 1 && defender_type == 2) typeDamage = 2.0f;
+    if (skilltype == 1 && defender_type == 3) typeDamage = 0.5f;
 
-        if ( skiiltype == 4 && deffender_type == 1) typedamage=2.0f;
-        if ( skiiltype == 4 && deffender_type == 2) typedamage= 0.5f;
+    if (skilltype == 3 && defender_type == 1) typeDamage = 2.0f;
+    if (skilltype == 3 && defender_type == 2) typeDamage = 0.5f;
 
-        if ( skiiltype == 3 && deffender_type == 3) typedamage= 2.0f;
-        if ( skiiltype == 3 && deffender_type == 1) typedamage= 0.5f;
-
-        if ( skiiltype == 5 && deffender_type == 2) typedamage=2.0f;
-        if ( skiiltype == 5 && deffender_type == 1) typedamage=0.5f;
+    if (skilltype == 2 && defender_type == 3) typeDamage = 2.0f;
+    if (skilltype == 2 && defender_type == 1) typeDamage = 0.5f;
     
     int critical_Chance = rand() % 11 + 1;
     
@@ -34,9 +31,23 @@ void Monster::TakeDamage(int attack,int skiiltype,int deffender_def,int deffende
     
     if (critical_Chance==11) critical=2;
     
-    float damage=attack*typedamage*critical-deffender_def;
+    float damage=attack*typeDamage*critical-defender_def;
     hp-=damage;
     
-    cout << "damage=" << damage <<"HP"<< hp <<"critical_Chance"<< critical_Chance<<"\n";
+    if (typeDamage == 2.0f)
+    {
+        cout << "효과는 굉장했다!\n";
+    }
+    else if (typeDamage == 0.5f)
+    {
+        cout << "효과가 별로인 듯하다...\n";
+    }
+
+    if (critical == 2)
+    {
+        cout << "급소에 맞았다!\n";
+    }
+
+    cout << name << " HP: " << hp << " / " << maxhp << "\n";
     
 }

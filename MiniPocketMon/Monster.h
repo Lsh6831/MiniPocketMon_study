@@ -5,13 +5,17 @@ using namespace std;
 class Monster
 {
 protected://기본 능력치(스테이터스)
+    
+    string name;
     int energy,attack,defense,movingSpeed;// 파생 능력치
     int level;
     int hp,maxhp;
     ;int typecode;
     
 public:
-    Monster(int eng,int att,int def, int spe , int lv= 1,int typ=1);
+    Monster(string name, int eng, int att, int def, int spe, int lv = 1, int typ = 1);
+    
+    string get_name() const { return name; }
     
     int get_energy() const{return energy;}
 
@@ -30,5 +34,6 @@ public:
     int get_typecode() const{ return typecode;}
     
     
-    void TakeDamage(int attack,int skiiltype,int deffender_def,int deffender_type);
+    void TakeDamage(string attackerName, string attackName, int attack, int skilltype, int defender_def, int defender_type);
+
 };

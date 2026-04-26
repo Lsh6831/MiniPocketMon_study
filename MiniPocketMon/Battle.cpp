@@ -34,22 +34,26 @@ bool Battle::PlayerAttack(Player& player, Monster& playerMonster, Monster& enemy
         cout << "\n기본 공격!\n";
 
         enemy.TakeDamage(
-            playerMonster.get_attack(),
-            playerMonster.get_typecode(),
-            enemy.get_defense(),
-            enemy.get_typecode()
-        );
+       playerMonster.get_name(),
+       "기본 공격",
+       playerMonster.get_attack(),
+       playerMonster.get_typecode(),
+       enemy.get_defense(),
+       enemy.get_typecode()
+   );
     }
     else if (action == 2)
     {
         cout << "\n스킬 공격!\n";
 
         enemy.TakeDamage(
-            playerMonster.get_attack() + 3,
-            playerMonster.get_typecode(),
-            enemy.get_defense(),
-            enemy.get_typecode()
-        );
+       playerMonster.get_name(),
+       "스킬 공격",
+       playerMonster.get_attack() + 3,
+       playerMonster.get_typecode(),
+       enemy.get_defense(),
+       enemy.get_typecode()
+   );
     }
     else if (action == 3)
     {
@@ -79,22 +83,26 @@ void Battle::EnemyAttack(Monster& enemy, Monster& playerMonster)
         cout << "\n적의 기본 공격!\n";
 
         playerMonster.TakeDamage(
-            enemy.get_attack(),
-            enemy.get_typecode(),
-            playerMonster.get_defense(),
-            playerMonster.get_typecode()
-        );
+     enemy.get_name(),           // 공격자 이름
+     "기본 공격",
+     enemy.get_attack(),
+     enemy.get_typecode(),
+     playerMonster.get_defense(),
+     playerMonster.get_typecode()
+ );
     }
     else
     {
         cout << "\n적의 스킬 공격!\n";
 
         playerMonster.TakeDamage(
-            enemy.get_attack() + 3,
-            enemy.get_typecode(),
-            playerMonster.get_defense(),
-            playerMonster.get_typecode()
-        );
+     enemy.get_name(),           // 공격자 이름
+    "스킬 공격",
+     enemy.get_attack()+ 3,
+     enemy.get_typecode(),
+     playerMonster.get_defense(),
+     playerMonster.get_typecode()
+ );
     }
 }
 
