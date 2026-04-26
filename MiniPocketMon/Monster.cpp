@@ -51,3 +51,15 @@ void Monster::TakeDamage(string attackerName, string attackName, int attack, int
     cout << name << " HP: " << hp << " / " << maxhp << "\n";
     
 }
+void Monster::Heal(int amount)
+{
+    hp += amount;
+
+    if (hp > maxhp)
+    {
+        hp = maxhp;
+    }
+
+    cout << name << "의 HP가 " << amount << " 회복되었습니다!\n";
+    cout << name << " HP: " << hp << " / " << maxhp << "\n";
+}

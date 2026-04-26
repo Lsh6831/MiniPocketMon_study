@@ -16,28 +16,20 @@ int Player::GetMonsterBallCount() const
     return inventory[1];
 }
 
-void Player::UsePotion(int& hp, int maxhp)
+bool Player::UsePotion()
 {
     if (inventory[0] <= 0)
     {
         cout << "상처약이 없습니다!\n";
-        return;
-    }
-
-    if (hp >= maxhp)
-    {
-        cout << "이미 체력이 가득 찼습니다!\n";
-        return;
+        return false;
     }
 
     inventory[0]--;
 
-    hp += 20;
+    cout << "상처약을 사용했습니다!\n";
+    cout << "남은 상처약: " << inventory[0] << "개\n";
 
-    if (hp > maxhp)
-        hp = maxhp;
-
-    cout << "상처약 사용! 현재 HP: " << hp << "/" << maxhp << "\n";
+    return true;
 }
 
 bool Player::UseMonsterBall()

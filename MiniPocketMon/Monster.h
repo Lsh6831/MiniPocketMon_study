@@ -35,5 +35,7 @@ public:
     
     
     void TakeDamage(string attackerName, string attackName, int attack, int skilltype, int defender_def, int defender_type);
+    
+    void Heal(int amount);
 
 };

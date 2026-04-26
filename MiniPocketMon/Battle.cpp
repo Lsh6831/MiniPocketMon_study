@@ -57,11 +57,10 @@ bool Battle::PlayerAttack(Player& player, Monster& playerMonster, Monster& enemy
     }
     else if (action == 3)
     {
-        cout << "\n상처약 사용!\n";
-
-        // Monster의 hp가 private/protected라서
-        // 지금 Monster 클래스에 Heal 함수가 필요함
-        // 예: playerMonster.Heal(20);
+        if (player.UsePotion())
+        {
+            playerMonster.Heal(50);
+        }
     }
     else if (action == 4)
     {
