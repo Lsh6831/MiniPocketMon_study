@@ -9,6 +9,7 @@ using namespace std;
 
 int main()
 {
+    system("chcp 65001");
     srand((unsigned int)time(NULL));
 
     cout << "=============================\n";
@@ -24,16 +25,21 @@ int main()
     cout << "3. 꼬부기    [물]\n";
     cout << "4. 파오리    [바람]\n\n";
     
-    vector<Monster> monsters = {
+    vector<Monster> monsters = 
+    {
         Monster("파이리", 10, 7, 3, 4, 1, 1),
-        Monster("이상해씨", 12, 5, 4, 3, 1, 2),
-        Monster("꼬부기", 11, 6, 5, 2, 1, 3),
-        Monster("파오리", 9, 8, 2, 7, 1, 4)
+    Monster("이상해씨", 12, 5, 4, 3, 1, 2),
+    Monster("꼬부기", 11, 6, 5, 2, 1, 3),
+        Monster("파오리", 9, 8, 2, 7, 1, 4),
+        Monster("꼬랫", 4, 3, 1, 4, 1, 0),
+        Monster("구구", 4, 3, 1, 4, 1, 4),
+        Monster("모다피", 4, 3, 1, 4, 1, 2),
+        Monster("잉어킹", 4, 1, 1, 4, 1, 3)
     };
     
     cout << "몬스터를 선택하세요!\n\n";
 
-    for (int i = 0; i < monsters.size(); i++)
+    for (int i = 0; i < 4; i++)
     {
         cout << i + 1 << ". " << monsters[i].get_name() << "\n";
     }
@@ -42,6 +48,9 @@ int main()
     cout << "번호 입력: ";
     cin >> choice;
 
+    
+    cout << monsters[choice-1].get_name() << "를 선택하였습니다!\n";
+    
     Monster myMonster = monsters[0];
 
     int enemyIndex = rand() % monsters.size();

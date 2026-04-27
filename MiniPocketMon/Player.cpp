@@ -2,6 +2,7 @@
 
 Player::Player()
 {
+    
     inventory[0] = 3; // 상처약
     inventory[1] = 5; // 몬스터볼
 }

@@ -13,7 +13,7 @@ Monster::Monster(string name, int eng, int att, int def, int spe, int lv, int ty
 void Monster::TakeDamage(string attackerName, string attackName, int attack, int skilltype, int defender_def, int defender_type)
 {
     //typecode
-    //1.FIRE 2.GRASS 3.WATER 4.WIND 
+    //0.NOMAL 1.FIRE 2.GRASS 3.WATER 4.WIND 
     float typeDamage = 1.0f;
     
     if (skilltype == 1 && defender_type == 2) typeDamage = 2.0f;
