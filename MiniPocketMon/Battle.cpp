@@ -133,7 +133,8 @@ bool Battle::PlayerAttack(Player& player, Monster& playerMonster, Monster& enemy
     {
         if (player.UsePotion())
         {
-            playerMonster.Heal(50);
+            cout<<playerMonster.get_name()<<"이거 힐전\n";
+            playerMonster.Heal(100);
         }
     }
     else if (action == 4)

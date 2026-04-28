@@ -59,9 +59,9 @@ int main()
     
 
 // 이동 부분
-    
     while(myMonster.get_hp()>=0)
     {
+        player.PlayerMove();
         
         int enemyIndex = rand() % monsters.size();
         Monster enemy = monsters[enemyIndex];

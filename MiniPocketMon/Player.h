@@ -20,4 +20,6 @@ public:
 
     void PrintInventory() const;
     
+    void PlayerMove() const;
+    
 };

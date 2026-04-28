@@ -6,6 +6,29 @@ Player::Player()
     inventory[1] = 5; // 몬스터볼
 }
 
+void Player::PlayerMove() const
+{
+    string playermove;
+    while (true)
+    {
+        int r = rand() % 10+1;
+        
+        cout << "이동 입력: 위 아래 이동 : W S ,"<<"\n";
+        cout << "이동 입력: 좌  우 이동 : A D ,"<<"\n";
+        cin >> playermove;
+        
+        if (r==5)
+        {
+            cout << playermove << "를 선택하였습니다!  "<<r<<"  \n";
+            break;
+        }
+        else
+        {
+            cout << playermove << "를 선택하였습니다!  "<<r<<"  \n";
+        }   
+    }
+    }
+
 
 int Player::GetPotionCount() const
 {
