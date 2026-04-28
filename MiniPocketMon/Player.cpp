@@ -16,18 +16,24 @@ void Player::PlayerMove() const
         cout << "이동 입력: 위 아래 이동 : W S ,"<<"\n";
         cout << "이동 입력: 좌  우 이동 : A D ,"<<"\n";
         cin >> playermove;
-        
-        if (r==5)
+        if (playermove == "W"||playermove == "S"||playermove == "D"||playermove == "A")
         {
-            cout << playermove << "를 선택하였습니다!  "<<r<<"  \n";
-            break;
+            if (r>=2)
+            {
+                cout << playermove << "를 선택하였습니다!  "<<r<<"  \n";
+                break;
+            }
+            else
+            {
+                cout << playermove << "를 선택하였습니다!  "<<r<<"  \n";
+            }   
         }
         else
         {
-            cout << playermove << "를 선택하였습니다!  "<<r<<"  \n";
-        }   
+            cout << "이동 을 정상적으로 입력해주세요 ,"<<"\n";
+        }
     }
-    }
+}
 
 
 int Player::GetPotionCount() const

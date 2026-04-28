@@ -8,21 +8,34 @@ int Battle::SelectAction()
 {
     int action;
 
-    cout << "\n행동을 선택하세요.\n";
-    cout << "1. 기본 공격\n";
-    cout << "2. 스킬 공격\n";
-    cout << "3. 상처약 사용\n";
-    cout << "4. 몬스터볼 던지기\n";
-    cout << "선택: ";
-    cin >> action;
-
-    if (action < 1 || action > 4)
+    while (true)
     {
-        cout << "잘못 입력해서 기본 공격을 합니다.\n";
-        action = 1;
-    }
+        cout << "\n행동을 선택하세요.\n";
+        cout << "1. 기본 공격\n";
+        cout << "2. 스킬 공격\n";
+        cout << "3. 상처약 사용\n";
+        cout << "4. 몬스터볼 던지기\n";
+        cout << "선택: ";
 
-    return action;
+        cin >> action;
+
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+
+            cout << "숫자만 입력하세요!\n";
+            continue;
+        }
+
+        if (action < 1 || action > 4)
+        {
+            cout << "1~4번 중에서 선택하세요!\n";
+            continue;
+        }
+
+        return action;
+    }
 }
 void Battle::StartBattle(Player& player, Monster& playerMonster, Monster& enemy)
 {
