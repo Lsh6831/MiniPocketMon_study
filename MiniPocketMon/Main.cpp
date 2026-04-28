@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <windows.h>
 #include <ctime>
 #include  <vector>
 #include "Monster.h"
@@ -9,6 +10,8 @@ using namespace std;
 
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
     system("chcp 65001");
     srand((unsigned int)time(NULL));
 
@@ -28,8 +31,8 @@ int main()
     vector<Monster> monsters = 
     {
         Monster("파이리", 10, 7, 3, 4, 1, 1),
-    Monster("이상해씨", 12, 5, 4, 3, 1, 2),
-    Monster("꼬부기", 11, 6, 5, 2, 1, 3),
+        Monster("이상해씨", 12, 5, 4, 3, 1, 2),
+        Monster("꼬부기", 11, 6, 5, 2, 1, 3),
         Monster("파오리", 9, 8, 2, 7, 1, 4),
         Monster("꼬랫", 4, 3, 1, 4, 1, 0),
         Monster("구구", 4, 3, 1, 4, 1, 4),
@@ -51,7 +54,7 @@ int main()
     
     cout << monsters[choice-1].get_name() << "를 선택하였습니다!\n";
     
-    Monster myMonster = monsters[0];
+    Monster myMonster = monsters[choice-1];
 
     int enemyIndex = rand() % monsters.size();
     Monster enemy = monsters[enemyIndex];

@@ -24,7 +24,81 @@ int Battle::SelectAction()
 
     return action;
 }
+void Battle::StartBattle(Player& player, Monster& playerMonster, Monster& enemy)
+{
+    while (true)
+    {
+        bool playerFirst;
 
+        if (playerMonster.get_moving_speed() > enemy.get_moving_speed())
+        {
+            playerFirst = true;
+        }
+        else if (playerMonster.get_moving_speed() < enemy.get_moving_speed())
+        {
+            playerFirst = false;
+        }
+        else
+        {
+            playerFirst = rand() % 2;
+        }
+
+        if (playerFirst)
+        {
+            cout << "\n[플레이어 선공]\n";
+
+            bool isCatchSuccess = PlayerAttack(player, playerMonster, enemy);
+
+            if (isCatchSuccess)
+            {
+                cout << "\n전투 종료!\n";
+                break;
+            }
+
+            if (enemy.get_hp() <= 0)
+            {
+                cout << "\n승리했습니다!\n";
+                break;
+            }
+
+            cout << "\n[적 턴]\n";
+            EnemyAttack(enemy, playerMonster);
+
+            if (playerMonster.get_hp() <= 0)
+            {
+                cout << "\n패배했습니다!\n";
+                break;
+            }
+        }
+        else
+        {
+            cout << "\n[적 선공]\n";
+            EnemyAttack(enemy, playerMonster);
+
+            if (playerMonster.get_hp() <= 0)
+            {
+                cout << "\n패배했습니다!\n";
+                break;
+            }
+
+            cout << "\n[플레이어 턴]\n";
+
+            bool isCatchSuccess = PlayerAttack(player, playerMonster, enemy);
+
+            if (isCatchSuccess)
+            {
+                cout << "\n전투 종료!\n";
+                break;
+            }
+
+            if (enemy.get_hp() <= 0)
+            {
+                cout << "\n승리했습니다!\n";
+                break;
+            }
+        }
+    }
+}
 bool Battle::PlayerAttack(Player& player, Monster& playerMonster, Monster& enemy)
 {
     int action = SelectAction();
@@ -143,78 +217,3 @@ bool Battle::TryCatch(Player& player, Monster& enemy)
     return false;
 }
 
-void Battle::StartBattle(Player& player, Monster& playerMonster, Monster& enemy)
-{
-    while (true)
-    {
-        bool playerFirst;
-
-        if (playerMonster.get_moving_speed() > enemy.get_moving_speed())
-        {
-            playerFirst = true;
-        }
-        else if (playerMonster.get_moving_speed() < enemy.get_moving_speed())
-        {
-            playerFirst = false;
-        }
-        else
-        {
-            playerFirst = rand() % 2;
-        }
-
-        if (playerFirst)
-        {
-            cout << "\n[플레이어 선공]\n";
-
-            bool isCatchSuccess = PlayerAttack(player, playerMonster, enemy);
-
-            if (isCatchSuccess)
-            {
-                cout << "\n전투 종료!\n";
-                break;
-            }
-
-            if (enemy.get_hp() <= 0)
-            {
-                cout << "\n승리했습니다!\n";
-                break;
-            }
-
-            cout << "\n[적 턴]\n";
-            EnemyAttack(enemy, playerMonster);
-
-            if (playerMonster.get_hp() <= 0)
-            {
-                cout << "\n패배했습니다!\n";
-                break;
-            }
-        }
-        else
-        {
-            cout << "\n[적 선공]\n";
-            EnemyAttack(enemy, playerMonster);
-
-            if (playerMonster.get_hp() <= 0)
-            {
-                cout << "\n패배했습니다!\n";
-                break;
-            }
-
-            cout << "\n[플레이어 턴]\n";
-
-            bool isCatchSuccess = PlayerAttack(player, playerMonster, enemy);
-
-            if (isCatchSuccess)
-            {
-                cout << "\n전투 종료!\n";
-                break;
-            }
-
-            if (enemy.get_hp() <= 0)
-            {
-                cout << "\n승리했습니다!\n";
-                break;
-            }
-        }
-    }
-}
