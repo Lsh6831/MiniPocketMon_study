@@ -72,6 +72,8 @@ int main()
         Battle battle;
         battle.StartBattle(player, myMonster, enemy);
     
+        //살아 나왓으니 보상
+        player.PlayerItemRandom();
         cout <<myMonster.get_name()<<" : "<<myMonster.get_hp()<<"\n";
     }
     

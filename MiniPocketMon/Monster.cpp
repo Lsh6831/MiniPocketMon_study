@@ -34,6 +34,10 @@ void Monster::TakeDamage(string attackerName, string attackName, int attack, int
     if (critical_Chance==11) critical=2;
     
     float damage=attack*typeDamage*critical-defender_def;
+    if (damage<0)
+    {
+        damage=0;
+    }
     hp-=damage;
     
     if (typeDamage == 2.0f)

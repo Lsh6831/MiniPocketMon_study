@@ -35,6 +35,38 @@ void Player::PlayerMove() const
     }
 }
 
+void Player::PlayerItemRandom()
+{
+    int i = rand() %3+1;
+    
+    if (i==1)
+    {
+        if (inventory[1] >= 99)
+        {
+            cout << "몬스터볼이 한계치 입니다!\n";
+        }
+    
+        inventory[1]++;
+    
+        cout << "몬스터볼 획득! 남은 개수: " << inventory[1] << "\n";
+
+    }
+    else if (i==2)
+    {
+        if (inventory[0] >= 99)
+        {
+            cout << "상처약이 한계치입니다!\n";
+        }
+
+        inventory[0]++;
+
+    
+        cout << "상처약 획득! 남은 개수: " << inventory[0] << "개\n";
+
+    }
+    cout <<"숫자 "<<i<<"\n";
+}
+
 
 int Player::GetPotionCount() const
 {
@@ -73,6 +105,37 @@ bool Player::UseMonsterBall()
     inventory[1]--;
 
     cout << "몬스터볼 사용! 남은 개수: " << inventory[1] << "\n";
+
+    return true;
+}
+
+bool Player::PlusPotion()
+{
+    if (inventory[0] >= 99)
+    {
+    cout << "상처약이 한계치입니다!\n";
+    return false;
+    }
+
+    inventory[0]--;
+
+    
+    cout << "상처약 획득! 남은 개수: " << inventory[0] << "개\n";
+
+    return true;
+}
+
+bool Player::PlusMonsterBall()
+{
+    if (inventory[1] >= 99)
+    {
+        cout << "몬스터볼이 한계치 입니다!\n";
+        return false;
+    }
+    
+    inventory[1]++;
+    
+    cout << "몬스터볼 획득! 남은 개수: " << inventory[1] << "\n";
 
     return true;
 }

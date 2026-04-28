@@ -17,9 +17,14 @@ public:
 
     bool UsePotion();
     bool UseMonsterBall();
+    
+    bool PlusPotion();
+    bool PlusMonsterBall();
 
     void PrintInventory() const;
     
     void PlayerMove() const;
+    
+    void PlayerItemRandom() ;
     
 };
