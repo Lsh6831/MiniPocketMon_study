@@ -19,4 +19,5 @@ public:
     bool UseMonsterBall();
 
     void PrintInventory() const;
+    
 };

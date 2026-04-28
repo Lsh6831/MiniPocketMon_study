@@ -25,6 +25,8 @@ void Monster::TakeDamage(string attackerName, string attackName, int attack, int
     if (skilltype == 2 && defender_type == 3) typeDamage = 2.0f;
     if (skilltype == 2 && defender_type == 1) typeDamage = 0.5f;
     
+    if (skilltype == 4 && defender_type == 2) typeDamage = 2.0f;
+    
     int critical_Chance = rand() % 11 + 1;
     
     int critical=1;

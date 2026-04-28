@@ -56,15 +56,25 @@ int main()
     
     Monster myMonster = monsters[choice-1];
 
-    int enemyIndex = rand() % monsters.size();
-    Monster enemy = monsters[enemyIndex];
+    
 
-    cout << "\n야생 " << enemy.get_name() << "이(가) 나타났다!\n";
+// 이동 부분
+    
+    while(myMonster.get_hp()>=0)
+    {
+        
+        int enemyIndex = rand() % monsters.size();
+        Monster enemy = monsters[enemyIndex];
+        cout << "\n야생 " << enemy.get_name() << "이(가) 나타났다!\n";
 
-    player.PrintInventory();
+        player.PrintInventory();
 
-    Battle battle;
-    battle.StartBattle(player, myMonster, enemy);
+        Battle battle;
+        battle.StartBattle(player, myMonster, enemy);
+    
+        cout <<myMonster.get_name()<<" : "<<myMonster.get_hp()<<"\n";
+    }
+    
 
     return 0;
 }
